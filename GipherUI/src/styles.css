@@ -1,0 +1,340 @@
+/* You can add global styles to this file, and also import other style files */
+/* Show it is fixed to the top */
+.login-page-container{
+    height: 100%;
+}
+.invalid-form{
+    color: #f32a1c;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.alertNotifications{
+    position:absolute;
+    z-index: 1;
+    right: 25px;
+}
+/* Making Login form Vertical Alignment Center */
+
+.login-form-section {
+    height: 70vh;
+}
+
+.card-signin {
+    color: white;
+    border: 0;
+    border-radius: .5rem;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,47,139,1) 63%, rgba(0,212,255,1) 100%);
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    
+}
+.content-header{
+    margin: 20px;
+}
+
+.spacer{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+.spacer-0_1{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+    /* Input Field Tool Tip */
+
+
+    /* Input Field Toop Tip */
+
+/* Login Form Design End */
+/* Footer Starts */
+.footerContainer{
+    margin: 5px;
+}
+/* Footer Ends */
+/* Search Icon */
+
+/* Search Icon Ends*/
+/* Add to Favourites */
+
+
+  .gifImageContainer:hover .gifImage {
+    opacity: 0.3;
+  }
+  
+  .gifImageContainer:hover .addToFavourite {
+    opacity: 1;
+  }
+  
+  .addToFavourite {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+/* Add to Favourites Ends */
+/* GIF Info Details */
+.gifImageContainer {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Bottom left text */
+  .img-info-bottom-left {
+    position: absolute;
+    background-color: rgb(255, 0, 0);
+    text-align: left;
+    font-size: 16px;
+    border-radius: 50px; /* Rounded Border */
+    border: none;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    bottom: 3px;
+    left: 3px;
+  }
+  
+  /* Top left text */
+  .img-info-top-left {
+    position: absolute;
+    background-color: black;
+    text-align: right;
+    font-size: 12px;
+
+    top: 3px;
+    left: 3px;
+  }
+  
+  /* Top right text */
+  .img-info-top-right {
+    position: absolute;
+    background-color: black;
+    text-align: right;
+    font-size: 12px;
+    
+    top: 3px;
+    right: 3px;
+  }
+  
+  /* Bottom right text */
+  .img-info-bottom-right {
+    position: absolute;
+    background-color: black;
+    text-align: right;
+    font-size: 12px;
+
+    bottom: 3px;
+    right: 3px;
+  }
+  
+  /* Centeresd text */
+  .img-info-centered {
+    position: absolute;
+    background-color: black;
+    text-align: right;
+    font-size: 12px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+/* GIF Info Details-Ends */
+/* .slide-control{color:#fff;font-size:80px;left:30px;margin-top:-70px;position:absolute;top:50%;}
+.slide-control.right{left:auto;right:30px;} */
+/*
+.btn-trend-svg{
+    background:url(./assets/images/3121768.svg) no-repeat;
+    background-size: 32px auto;
+ 
+    width: 34px;
+    height: 34px;
+}
+*/
+.btn-search-svg{
+    background:url(./assets/images/search.svg) no-repeat;
+    background-size: 32px auto;
+    width: 34px;
+    height: 34px;
+}
+.gipher-container{
+    margin: 75px;
+}
+
+/* .carousel-caption{
+    color: black;
+} */
+.stripe-vertical{
+    width: 100%;
+    margin-top: 5px;
+}
+.rounded-img{
+    border-radius: 2%;
+}
+.lower-level-0{
+    margin-top: 350px;
+}
+/*
+.carousel-item img {
+    width:100%
+  }
+/*
+.carousel-image-size{
+    height : 25%;
+    width :100%;
+}
+/*
+.w-100{
+    width:100px;
+}
+*/
+
+/* .small-carousel{
+    width:100%;
+}
+
+.round-carousel{
+    border-radius: 5%;
+    border-radius: 5px 5px 5px 5px;
+    overflow: hidden;
+} */
+
+.gif-list-container{
+    margin-top: -350px;
+    border-style: solid;
+/*
+    z-index: -1; 
+    opacity: 0.5;
+    font-size:40px; 
+    text-align:center; 
+    transform-style:all; 
+    transition-duration: 1s; 
+*/    
+}
+/*
+@keyframes cf4FadeInOut {
+    0% {
+      opacity:1;
+    }
+    17% {
+      opacity:1;
+    }
+    25% {
+      opacity:0;
+    }
+    92% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  #cf4a img:nth-of-type(1) {
+    animation-delay: 6s;
+  }
+  #cf4a img:nth-of-type(2) {
+    animation-delay: 4s;
+  }
+  */
+
+
+  /********
+  Page Not Found Page Decoration-Starts
+  */
+  
+.notFoundContainer {
+  position: relative;
+  height: 70vh;
+}
+
+.notFoundContainer .notFoundDiv {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.notFoundDiv {
+
+  width: 100%;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.notFoundDiv .notfoundHeader {
+  position: relative;
+  
+}
+.notFoundDiv .notfoundHeader h1 {
+  font-family: 'Arial', sans-serif;
+  font-size: 125px;
+  letter-spacing: 40px;
+  margin: 5px;
+ 
+}
+.notfoundContent{
+ 
+  text-transform: uppercase;
+}
+
+
+  /****
+  Page Not Found Page Decorations-Ends
+  ****/
+  .overlaySection{
+    position: absolute;
+    width:100%;
+    height:100%;
+    top: 50%;
+    left: 50%;
+    color: rgb(15, 15, 15);
+    transform: translate(-50%, -50%);
+    background-color:rgb(110, 106, 106);
+    z-index:1002;
+    opacity: 0.5;
+  }
+
+  .readOnlyField{
+    background-color:transparent !important; /* We need to Override Default */
+    border: 0;
+    font-size: 1em;
+    color: white;
+    box-shadow: none;
+  }
+  .textAvatarSmall{
+    border:none;
+    background-color: rgb(180, 169, 169);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 24px;
+
+    line-height: 45px;
+    text-align: center;
+ 
+    display: inline-block;
+  }
+  .textAvatarLarge{
+    border:none;
+    background-color: rgb(180, 169, 169);
+    width: 256px;
+    height: 256px;
+    border-radius: 50%;
+    font-size: 102px;
+   
+    line-height: 256px;
+    text-align: center;
+   
+    display: inline-block;
+  }
+  

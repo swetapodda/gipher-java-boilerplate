@@ -1,0 +1,150 @@
+image: maven:3.3-jdk-8-alpine
+
+services:
+  - mysql
+  - mongo
+  - rabbitmq:latest
+  
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+#  MAVEN_CLI_OPTS: "--batch-mode"
+  # First Define Initialize MySQL Database with Default Params and then Use them for MS related Properties
+  #MYSQL_USER: root
+  MYSQL_ROOT_PASSWORD: root
+  #MYSQL_DATABASE: gipher_db
+  # First Define and Initialize Mongo with Default Params and then use them for MS RElated Properties
+  MONGO_INITDB_ROOT_USERNAME: admin
+  MONGO_INITDB_ROOT_PASSWORD: admin
+  MONGO_INITDB_DATABASE: GIPHERSBA 
+  # Micro Service Related Propertie which refer the same value as above
+  MONGO_DATABASE: GIPHERSBA
+  MONGO_HOST: mongo
+  MONGO_PORT: 27017
+  MONGO_USERNAME: admin
+  MONGO_PASSWORD: admin
+  MONGO_AUTHENTICATION_DATABASE: admin
+  
+  MYSQL_HOST: mysql
+  MYSQL_DATABASE: GIPHERSBA
+  MYSQL_USER: root
+  MYSQL_PASSWORD: root
+  MYSQL_DB_URL: jdbc:mysql://mysql:3306/$MYSQL_DATABASE?createDatabaseIfNotExist=true
+  RABBIT_MQ_HOST: rabbitmq
+  RABBIT_MQ_PORT: 5672
+  RABBIT_MQ_USERNAME: guest
+  RABBIT_MQ_PASSWORD: guest
+  ZIPKIN_BASE_URL: http://192.168.1.11:9411/
+  EUREKA_SERVER_ZONE: http://192.168.1.5:8761/eureka/
+  HOST_NAME: 192.168.1.10
+  MYSQL_PORT: ${{job.services.mysql.ports['3306']}}
+
+    
+stages:
+  - build
+  - test
+  
+cache:
+  paths:
+    - ./.m2/repository/
+    - target/
+  key: "$CI_BUILD_REF_NAME"
+
+build:
+  before_script:
+     - echo "Do we need update or Install..?"
+     - "ls -la"
+     - "ls ./.m2/"
+
+
+  stage: build
+  script:
+    - echo "My SQL:>$MYSQL_HOST<"
+    - mvn $MAVEN_CLI_OPTS clean compile
+
+test:
+  before_script:
+    - echo "Do we need update or Install..?"
+    - "ls -la"
+    - "ls ./.m2/"
+
+  stage : test
+  script:
+    - echo "My SQL:>$MYSQL_HOST<"
+image: maven:3.3-jdk-8-alpine
+
+services:
+  - mysql
+  - mongo
+  - rabbitmq:latest
+  
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+#  MAVEN_CLI_OPTS: "--batch-mode"
+  # First Define Initialize MySQL Database with Default Params and then Use them for MS related Properties
+  #MYSQL_USER: root
+  MYSQL_ROOT_PASSWORD: root
+  #MYSQL_DATABASE: gipher_db
+  # First Define and Initialize Mongo with Default Params and then use them for MS RElated Properties
+  MONGO_INITDB_ROOT_USERNAME: admin
+  MONGO_INITDB_ROOT_PASSWORD: admin
+  MONGO_INITDB_DATABASE: GIPHERSBA 
+  # Micro Service Related Propertie which refer the same value as above
+  MONGO_DATABASE: GIPHERSBA
+  MONGO_HOST: mongo
+  MONGO_PORT: 27017
+  MONGO_USERNAME: admin
+  MONGO_PASSWORD: admin
+  MONGO_AUTHENTICATION_DATABASE: admin
+  
+  MYSQL_HOST: mysql
+  MYSQL_DATABASE: GIPHERSBA
+  MYSQL_USER: root
+  MYSQL_PASSWORD: root
+  MYSQL_DB_URL: jdbc:mysql://mysql:3306/$MYSQL_DATABASE?createDatabaseIfNotExist=true
+  RABBIT_MQ_HOST: rabbitmq
+  RABBIT_MQ_PORT: 5672
+  RABBIT_MQ_USERNAME: guest
+  RABBIT_MQ_PASSWORD: guest
+  ZIPKIN_BASE_URL: http://192.168.1.11:9411/
+  EUREKA_SERVER_ZONE: http://192.168.1.5:8761/eureka/
+  HOST_NAME: 192.168.1.10
+  MYSQL_PORT: ${{job.services.mysql.ports['3306']}}
+
+    
+stages:
+  - build
+  - test
+  
+cache:
+  paths:
+    - ./.m2/repository/
+    - target/
+  key: "$CI_BUILD_REF_NAME"
+
+build:
+  before_script:
+     - echo "Do we need update or Install..?"
+     - "ls -la"
+     - "ls ./.m2/"
+
+
+  stage: build
+  script:
+    - echo "My SQL:>$MYSQL_HOST<"
+    - mvn $MAVEN_CLI_OPTS clean compile
+
+test:
+  before_script:
+    - echo "Do we need update or Install..?"
+    - "ls -la"
+    - "ls ./.m2/"
+
+  stage : test
+  script:
+    - echo "My SQL:>$MYSQL_HOST<"
+    - echo "UnknownHostException mysql is rising, So Skipping Maven Testing"
+#    - mvn $MAVEN_CLI_OPTS test
+
+

@@ -1,0 +1,32 @@
+# Dockerfile has been added in all micro-services, you need to dockerize all micro-services and add docker-compose.yml file
+version: "3"
+
+services:
+  netflix-zuul-api-gateway:
+      
+    image: netflix_zuul_api_gateway
+  
+    ports:
+      - "8765:8765"
+
+    environment:
+        ZIPKIN_BASE_URL: http://192.168.1.11:9411
+        EUREKA_SERVER_ZONE: http://192.168.1.5:8761/eureka
+        
+              
+        #MONGO DB SERVER DETAILS
+      
+        MONGO_HOST: 192.168.1.11
+        MONGO_PORT: 27017
+        MONGO_AUTHENTICATION_DATABASE: admin
+        MONGO_USERNAME: admin
+        MONGO_PASSWORD: password
+        MONGO_DATABASE: notesdb_06
+      
+        # RABBIT MQ SERVER DETAILS
+        RABBIT_MQ_HOST: 192.168.1.11
+        RABBIT_MQ_PORT: 5672
+        #RABBIT_MQ_USER_NAME: guest
+        #RABBIT_MQ_PASSWORD: guest
+   
+    

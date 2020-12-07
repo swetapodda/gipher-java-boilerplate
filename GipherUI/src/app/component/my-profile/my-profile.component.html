@@ -1,0 +1,89 @@
+<!-- SignUp / Registration Page Design-->
+<!-- BS 4.x  mx-auto is col center -->
+<div class='login-form-section'>
+  <div class='row h-100 justify-content-center align-items-center'>
+    <div class='mx-auto col-sm-12'>
+      <div class="row h-100 justify-content-center align-items-center ">
+        <!--Bring Left side Image Vertical center Align-->
+        <div class="col-lg-8 justify-content-center " style="height:100%vh;">
+          <!-- <img src="./assets/images/default_avatar.png" class="mx-auto d-block rounded border border-info " width="30%vw" /> -->
+          <div class=" mx-auto d-block text-center" style="height:100%vh;"> <span class="textAvatarLarge ">{{getAvatarText() | uppercase }}</span> </div>
+        </div>
+        <div class="col-lg-4 card-signin mx-auto">
+
+          <div class="row">
+            <!-- First Col Empty and Last Col Empty.. So that Login form content Center-->
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-10">
+              <div class="div-center">
+                <div class="content">
+                  <div class="content-header text-center">
+                    <h3>My Profile</h3>
+                  </div>
+
+                  <!-- Note: Angular form is controlling Reactive Form and Validation -->
+                  
+                  <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+                    <div class="form-group">
+                      <label class="form-control-placeholder" for="firstName">First Name</label>
+                      <input type="text" formControlName="firstName" class="form-control moveplaceHolderUp readOnlyField"  placeholder="First Name" readonly  >
+                      <div *ngIf="submitted && profileFormControls.firstName.errors" class="invalid-form">
+                        <div *ngIf="profileFormControls.firstName.errors.required">First Name is required</div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="form-control-placeholder" for="lastName">Last Name</label>
+                      <input type="text" formControlName="lastName" class="form-control moveplaceHolderUp readOnlyField"   placeholder="Last Name" readonly>
+                      <div *ngIf="submitted && profileFormControls.lastName.errors" class="invalid-form">
+                        <div *ngIf="profileFormControls.lastName.errors.required">Last Name is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-placeholder" for="exampleInputEmail1">Email</label>
+                      <input type="email" formControlName="email" class="form-control moveplaceHolderUp readOnlyField" placeholder="Email" readonly>
+                      <div *ngIf="submitted && profileFormControls.email.errors" class="invalid-form">
+                        <div *ngIf="profileFormControls.email.errors.required">Email is required</div>
+                        <div *ngIf="profileFormControls.email.errors">Email is Invalid</div>
+                      </div>
+                    </div>
+                    <!-- <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" formControlName="password"class="form-control"  placeholder="Password">
+                      <div *ngIf="submitted && registrationControls.password.errors" class="invalid-form">
+                        <div *ngIf="registrationControls.password.errors.required">Password is required</div>
+                        <div *ngIf="registrationControls.password.errors">Invalid Password</div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Confirm Password</label>
+                      <input type="password" formControlName="confirmPassword" class="form-control"  placeholder="Confirm Password">
+                      <div *ngIf="submitted && registrationControls.confirmPassword.errors" class="invalid-form">
+                        <div *ngIf="registrationControls.confirmPassword.errors.required">Confirm password is required</div>
+                        <div *ngIf="registrationControls.password.errors">Invalid Confirm Password</div>
+                      </div>
+                    </div> -->
+
+                    
+                    <div class="row spacer">
+                     <!--Space Providing Some Space-->
+                    </div>
+                  </form> 
+
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+          </div>
+     
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

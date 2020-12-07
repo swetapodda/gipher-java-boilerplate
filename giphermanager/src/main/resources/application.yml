@@ -1,0 +1,62 @@
+server:
+  port: 9200
+  
+spring:
+  application:
+    name: gipher-manager
+  data:
+    mongodb:
+      authentication-database: ${MONGO_AUTHENTICATION_DATABASE}
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+      database: ${MONGO_DATABASE}
+      port: ${MONGO_PORT}
+      host: ${MONGO_HOST}
+      
+# Rabbit MQ Stream to Publish Messages  
+  cloud:
+      stream:
+        bindings:
+          output:
+            destination: GipherRecomendationsStream
+#          GipherRecomendationsStream:
+#            destination: GipherRecomendationsStream
+        default:
+          contentType: application/json
+
+#          binder: local_rabbit
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+  zipkin:
+    base-url: ${ZIPKIN_BASE_URL} 
+    locator:
+      discovery:
+        enabled: true
+#  #Rabbit MQ Server
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST}
+    port: ${RABBIT_MQ_PORT}
+    username: ${RABBIT_MQ_USERNAME}
+    password: ${RABBIT_MQ_PASSWORD}
+ 
+#    
+#
+#balancing-servers:
+#  ribbon:
+#    eureka:
+#      enabled: false
+#    listOfServers: ${LIST_OF_BALANCING_SERVERS}
+#    ServerListRefreshInterval: 15000    
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_ZONE}
+    register-with-eureka: true
+#    fetch-registry: true
+  instance:
+    #preferIpAddress: true This brings Docker network IP Address like: http://172.18.0.5/
+    hostname: ${HOST_NAME}
+    instance-id: ${HOST_NAME}:${spring.application.name}:${spring.application.instance_id:${server.port}} #This is used in Eureka SErver Status link text    
+#  

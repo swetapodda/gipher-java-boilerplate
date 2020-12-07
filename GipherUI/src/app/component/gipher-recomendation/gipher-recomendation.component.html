@@ -1,0 +1,26 @@
+<div class="row">
+  
+  <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" *ngFor="let gipherRecomendation of recomendationGifs">
+    <img src="{{gipherRecomendation.giphyUrl}}" alt="..." class="rounded-img gifImage stripe-vertical" title="{{gipherRecomendation.title}} x Liked: {{gipherRecomendation.count}}">
+    <div class="img-info-bottom-left" style="margin-left: 20px;">
+      <span  class="" >
+        <i class="fa " aria-hidden="true" style="color: white;width:20px; text-align: center;">{{gipherRecomendation.count}}</i>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Empty Page Notification-->
+
+<div class="notFoundContainer"  *ngIf="recomendationGifs.length ==0 " >
+<div class="notFoundDiv">
+  <div class="notfoundHeader">
+    <h3>You Dont have any Recomendation GIFs</h3>
+    
+  </div>
+  <div class="notfoundContent">
+    <h2>Visit to Dashboard and add your Favourite GIFs</h2>
+   
+  </div>
+</div>
+</div>

@@ -1,0 +1,1 @@
+docker build -t netflix_zuul_api_gateway .

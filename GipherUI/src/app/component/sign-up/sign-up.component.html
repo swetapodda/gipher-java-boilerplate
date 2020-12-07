@@ -1,0 +1,106 @@
+<!-- SignUp / Registration Page Design-->
+
+<div class='login-form-section'>
+  <div class='row h-100 justify-content-center align-items-center'>
+    <div class='mx-auto col-sm-12'>
+      <div class="row h-100 justify-content-center align-items-center ">
+        <!--Bring Left side Image Vertical center Align-->
+        <div class="col-lg-8 d-none d-lg-block justify-content-center ">
+          <img src="./assets/images/Gipher_Logo_4.png" />
+        </div>
+        <div class="col-lg-4 card-signin mx-auto">
+
+          <div class="row">
+            <!-- First Col Empty and Last Col Empty.. So that Login form content Center-->
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-10">
+              <div class="div-center">
+                <div class="content">
+                  <div class="content-header text-center">
+                    <h3>Create Your Account</h3>
+                  </div>
+
+                  <!-- Note: Angular form is controlling Reactive Form and Validation -->
+                  
+                  <form [formGroup]="registrationForm" (ngSubmit)="createUesr()">
+                    <div class="form-group">
+                      <label class="form-control-placeholder" for="firstName">First Name</label>
+                      <input type="text" formControlName="firstName" class="form-control moveplaceHolderUp"  placeholder="First Name">
+                      <div *ngIf="submitted && registrationControls.firstName.errors" class="invalid-form">
+                        <div *ngIf="registrationControls.firstName.errors.required">First Name is required</div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="form-control-placeholder" for="lastName">Last Name</label>
+                      <input type="text" formControlName="lastName" class="form-control moveplaceHolderUp"   placeholder="Last Name">
+                      <div *ngIf="submitted && registrationControls.lastName.errors" class="invalid-form">
+                        <div *ngIf="registrationControls.lastName.errors.required">Last Name is required</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-placeholder" for="exampleInputEmail1">Email</label>
+                      <input type="email" formControlName="email" class="form-control moveplaceHolderUp" placeholder="Email">
+                      <div *ngIf="submitted && registrationControls.email.errors" class="invalid-form">
+                        <div *ngIf="registrationControls.email.errors.required">Email is required</div>
+                        <div *ngIf="registrationControls.email.errors">Email is Invalid</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" formControlName="password"class="form-control"  placeholder="Password  (Min 8 Chars Required)">
+                      <div *ngIf="submitted && registrationControls.password.errors" class="invalid-form">
+                        <div *ngIf="registrationControls.password.errors.required">Password is required</div>
+                        <div *ngIf="registrationControls.password.errors">Invalid Password</div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Confirm Password</label>
+                      <input type="password" formControlName="confirmPassword" class="form-control"  placeholder="Confirm Password (Should Match Password)">
+                      <div *ngIf="submitted && registrationControls.confirmPassword.errors" class="invalid-form">
+                        <div *ngIf="registrationControls.confirmPassword.errors.required">Confirm password is required</div>
+                        <div *ngIf="registrationControls.password.errors">Invalid Confirm Password</div>
+                      </div>
+                    </div>
+                    <!-- General Custom Validation Error-->
+                    <div class="form-group">
+                      <div *ngIf="customError" class="invalid-form">
+                        <div *ngIf="customError">{{this.customError}}</div>
+                      </div>
+                    </div>
+                    
+                    <div class="content-footer text-center">
+                      <button [disabled]="( submitted || ! registrationForm.valid)" type="submit" class="btn btn-primary text-center">Register</button>
+                    </div>
+
+                    <div class="row spacer">
+                      <div class="col-lg-12 text-center ">
+                        <div class="row">
+                          <div class="col-lg-4 text-center ">
+                            <a routerLink="/login" class="text-center">Login</a>
+                          </div>
+                          <div class="col-lg-8 text-center ">
+                            <a routerLink="/recoverPassword" class="">Reset Password</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form> 
+
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+          </div>
+     
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

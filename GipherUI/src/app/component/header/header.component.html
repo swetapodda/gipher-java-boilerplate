@@ -1,0 +1,81 @@
+<nav class="navbar  navbar-expand-md fixed-top navbar-light bg-light">
+  <a href="/">
+    <img src="./assets/images/Gipher_Logo_2.png" width="160" class="rounded-img float-left" alt="Gipher Logo">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse collapse justify-content-between" id="navbarCollapse">
+
+
+
+
+    <ul class="nav navbar-nav">
+       <div *ngIf="loginStatus" > 
+        <!-- <img src="./assets/images/default_avatar.png" class="avatar img-responsive" width="30vw%;">
+        Welcome {{loginUser.firstName | uppercase }} -->
+        
+        <div class=" mx-auto d-block text-center" style="height:100%vh;"> <span class="textAvatarSmall ">{{getAvatarText() | uppercase }}</span> 
+          Welcome {{loginUser.firstName | uppercase }}
+        </div>
+      </div>
+      
+     
+    </ul>
+    <ul class="nav navbar-nav">
+     
+      <li *ngIf="loginStatus" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          My Gipher
+          <span *ngIf=" (favouriteGifs && favouriteGifs.length) > 0"
+            class="badge badge-pill badge-success">{{favouriteGifs.length}}</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-link" *ngIf="loginStatus" routerLink="myFavourites" href="">My Favourites
+            <span *ngIf=" (favouriteGifs && favouriteGifs.length) > 0"
+              class="badge badge-pill badge-success">{{favouriteGifs.length}}</span></a>
+          <a routerLink="/gipherRecomendation" class="nav-link dropdown-item" href="">Gipher Recomendations</a>
+
+          <!-- <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a> -->
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a routerLink="/dashBoard" class="nav-link" href="">Dashboard</a>
+      </li>
+      <!-- Right Side Aligned Menu-->
+      <li *ngIf="loginStatus" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a routerLink="/myProfile" class="nav-link dropdown-item" href="">My Profile</a>
+          <a  class="nav-link dropdown-item" href="" (click)="logOut($event)">Logout</a>
+
+          <!-- <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a> -->
+        </div>
+      </li>
+      <li class="nav-item">
+        <a *ngIf=" ! loginStatus" routerLink="/login" class="nav-link ">Login</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf=" ! loginStatus" routerLink="/signUp" class="nav-link ">Sign Up</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+<div class="col-lg-3 text-center ">
+
+</div>
+<div class="col-lg-3 text-center ">
+
+</div>

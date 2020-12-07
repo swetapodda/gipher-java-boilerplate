@@ -1,0 +1,17 @@
+# Dockerfile has been added in all micro-services, you need to dockerize all micro-services and add docker-compose.yml file
+version: "3"
+
+services:
+
+# MySQL Server Configuration
+  UbuntuDocker_MySql_8_0_21_Server:
+    image: mysql
+    container_name: MySql_8_0_21_DB_Server # To Avoid Auto Generated Name
+#    volumes:
+#      - ./mysql-dump:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: Passw0rd12345
+      MYSQL_DATABASE: notesdb_06

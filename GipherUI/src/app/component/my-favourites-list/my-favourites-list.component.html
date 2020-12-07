@@ -1,0 +1,26 @@
+<div class="row">
+  
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" *ngFor="let gipher of favouriteGifs">
+      <img src="{{gipher.giphyUrl}}" alt="..." class="rounded-img gifImage stripe-vertical" title="{{gipher.title}}">
+      <div class="img-info-bottom-left">
+        <a type="button" class="" (click)="removeFromFavourites(gipher)">
+          <i class="fa fa-heart  " aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+</div>
+
+<!-- Empty Page Notification-->
+
+<div class="notFoundContainer"  *ngIf="favouriteGifs.length ==0 " >
+  <div class="notFoundDiv">
+    <div class="notfoundHeader">
+      <h3>You Dont have any favourites Image</h3>
+      
+    </div>
+    <div class="notfoundContent">
+      <h2>Visit to Dashboard and add your Favourite GIFs</h2>
+     
+    </div>
+  </div>
+</div>

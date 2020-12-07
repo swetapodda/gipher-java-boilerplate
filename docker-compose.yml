@@ -1,0 +1,200 @@
+# Dockerfile has been added in all micro-services, you need to dockerize all micro-services and add docker-compose.yml file
+version: "3"
+
+services:
+
+# MySQL Server Configuration
+    mysql_db:
+        image: mysql
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_USER: root
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: gipher_db
+      
+# Mongo DB Configuration
+    mongo_db:
+        image: mongo:latest
+        restart: always
+        ports:
+            - 27017:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: admin
+            MONGO_INITDB_DATABASE: gipher_db
+
+#RABBIT MQ
+    rabbit_mq:
+        image: rabbitmq:3-management 
+        environment:
+             RABBITMQ_DEFAULT_USER: guest
+             RABBITMQ_DEFAULT_PASS: guest
+        ports:
+             - 5672:5672
+             - 15672:15672     
+#ZIPKIN              
+    zipkin:
+        image: openzipkin/zipkin
+        restart: always
+#        depends_on:
+#           - RabbitMQ 
+        ports:
+            - 9411:9411
+
+# EUREKA  DISCOVERY SERVICE
+    netflix_eureka_discovery_server:
+        image: netflix_eureka_discovery_server
+        ports:
+          - "8761:8761" 
+        depends_on:
+          - mongo_db
+          - rabbit_mq
+        environment:
+          ZIPKIN_BASE_URL: http://win_vm_01:9411
+          #MONGO DB SERVER DETAILS
+          
+          MONGO_HOST: mongo_db
+          MONGO_PORT: 27017
+          MONGO_AUTHENTICATION_DATABASE: admin
+          MONGO_USERNAME: admin
+          MONGO_PASSWORD: admin
+          MONGO_DATABASE: gipher_db
+          
+          # RABBIT MQ SERVER DETAILS
+          RABBIT_MQ_HOST: rabbit_mq
+          RABBIT_MQ_PORT: 5672
+          #RABBIT_MQ_USER_NAME: guest
+          #RABBIT_MQ_PASSWORD: guest          
+          HOST_NAME: win_vm_01
+    
+# ZUUL API GATEWAY   
+    netflix_zuul_api_gateway:
+        image: netflix_zuul_api_gateway
+        restart: always
+        ports:
+          - "8765:8765"
+        depends_on:
+          - mongo_db
+          - rabbit_mq
+          - netflix_eureka_discovery_server
+        environment:
+            EUREKA_SERVER_ZONE: http://win_vm_01:8761/eureka
+            ZIPKIN_BASE_URL: http://win_vm_01:9411
+                        
+            #MONGO DB SERVER DETAILS
+            MONGO_HOST: mongo_db
+            MONGO_PORT: 27017
+            MONGO_AUTHENTICATION_DATABASE: admin
+            MONGO_USERNAME: admin
+            MONGO_PASSWORD: admin
+            MONGO_DATABASE: gipher_db
+            # RABBIT MQ SERVER DETAILS
+            RABBIT_MQ_HOST: rabbit_mq
+            RABBIT_MQ_PORT: 5672
+            #RABBIT_MQ_USER_NAME: guest
+            #RABBIT_MQ_PASSWORD: guest
+            HOST_NAME: win_vm_01
+            
+# Account Manager Micro Service
+    account_manager_service:
+      
+        image: account_manager_service
+        ports:
+            - "9100:9100"
+        depends_on:
+            - mysql_db
+            - rabbit_mq
+            - netflix_eureka_discovery_server          
+        environment:
+          ZIPKIN_BASE_URL: http://win_vm_01:9411
+          EUREKA_SERVER_ZONE: http://win_vm_01:8761/eureka
+          #MYSQL DB SERVER DETAILS
+          MYSQL_HOST: mysql_db
+          MONGO_PORT: 3306
+          MYSQL_DATABASE: gipher_db
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+          
+          # RABBIT MQ SERVER DETAILS
+          RABBIT_MQ_HOST: rabbit_mq
+          RABBIT_MQ_PORT: 5672
+          RABBIT_MQ_USERNAME: guest
+          RABBIT_MQ_PASSWORD: guest
+          
+          #This is required where Service Running.So Zuul Can able connect to Server. Otherwise tying to local IP
+          HOST_NAME: win_vm_01
+       
+   
+# Gipher Manager Micro Service
+    gipher_manager_service:
+      
+        image: gipher_manager_service
+        ports:
+          - "9200:9200" 
+        depends_on:
+            - mongo_db
+            - rabbit_mq
+            - netflix_eureka_discovery_server  
+        environment:
+          
+            ZIPKIN_BASE_URL: http://win_vm_01:9411
+            EUREKA_SERVER_ZONE: http://win_vm_01:8761/eureka
+          
+            #MONGO DB SERVER DETAILS
+          
+            MONGO_HOST: mongo_db
+            MONGO_PORT: 27017
+            MONGO_AUTHENTICATION_DATABASE: admin
+            MONGO_USERNAME: admin
+            MONGO_PASSWORD: admin
+            MONGO_DATABASE: gipher_db
+          
+            # RABBIT MQ SERVER DETAILS
+            RABBIT_MQ_HOST: rabbit_mq
+            RABBIT_MQ_PORT: 5672
+            RABBIT_MQ_USERNAME: guest
+            RABBIT_MQ_PASSWORD: guest
+          
+            #This is required where Service Running.So Zuul Can able connect to Server. Otherwise tying to local IP
+            HOST_NAME: win_vm_01
+   
+# Gipher Recomender System Micro Service
+    gipher_recomender_service:
+      
+        image: gipher_recomender_service
+        ports:
+            - "9300:9300"
+        depends_on:
+            - mongo_db
+            - rabbit_mq
+            - netflix_eureka_discovery_server          
+        environment:
+          
+            ZIPKIN_BASE_URL: http://win_vm_01:9411
+            EUREKA_SERVER_ZONE: http://win_vm_01:8761/eureka
+          
+            #MONGO DB SERVER DETAILS
+              
+            MONGO_HOST: mongo_db
+            MONGO_PORT: 27017
+            MONGO_AUTHENTICATION_DATABASE: admin
+            MONGO_USERNAME: admin
+            MONGO_PASSWORD: admin
+            MONGO_DATABASE: gipher_db
+              
+            # RABBIT MQ SERVER DETAILS
+            RABBIT_MQ_HOST: rabbit_mq
+            RABBIT_MQ_PORT: 5672
+            RABBIT_MQ_USERNAME: guest
+            RABBIT_MQ_PASSWORD: guest
+              
+            #This is required where Service Running.So Zuul Can able connect to Server. Otherwise tying to local IP
+            HOST_NAME: win_vm_01
+
+# Gipher UI
+    gipher:
+        image: gipher
+        ports:
+            - "80:80" 

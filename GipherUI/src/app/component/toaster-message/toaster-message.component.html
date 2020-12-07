@@ -1,0 +1,14 @@
+<!-- Then put toasts within -->
+<!--Reference: https://getbootstrap.com/docs/4.0/components/alerts/-->
+<div class="alertNotifications">
+  <div *ngFor="let alertMessage of alertMessages">
+    <div class=" alert alert-{{alertMessage.type}} alert-dismissible fade show" role="alert">
+      <div class="font-weight-normal"> {{alertMessage.message}}</div>
+      <div class="font-weight-light"> {{alertMessage.dateTime}}</div>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
+</div>

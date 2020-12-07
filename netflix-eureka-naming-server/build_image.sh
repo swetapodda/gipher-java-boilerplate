@@ -1,0 +1,1 @@
+docker build -t netflix_eureka_discovery_server .

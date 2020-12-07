@@ -1,0 +1,1 @@
+docker build -t gipher_recomender_service .

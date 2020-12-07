@@ -1,0 +1,52 @@
+server:
+  port: 9100
+  
+spring:
+  application:
+    name: account-manager
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:3306/${MYSQL_DATABASE}
+#    url: ${MYSQL_DB_URL}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+  zipkin:
+    base-url: ${ZIPKIN_BASE_URL} 
+#  #Rabbit MQ Server
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST}
+    port: ${RABBIT_MQ_PORT}
+    username: ${RABBIT_MQ_USERNAME}
+    password: ${RABBIT_MQ_PASSWORD}
+  sleuth.sampler.probability: 1.0 
+#    
+#
+# Even without these entries, through Zuul API Gateway we can get benefit Load Balancing...
+#balancing-servers:
+#  ribbon:
+#    eureka:
+#      enabled: false
+#    listOfServers: ${LIST_OF_BALANCING_SERVERS}
+#    ServerListRefreshInterval: 15000    
+
+#eureka.client.service-url.defaultZone=${EUREKA_SERVER_ZONE}
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_ZONE}
+#    register-with-eureka: true
+#    fetch-registry: true
+  instance:
+    #preferIpAddress: true This brings Docker network IP Address like: http://172.18.0.5/
+    hostname: ${HOST_NAME}
+    instance-id: ${HOST_NAME}:${spring.application.name}:${spring.application.instance_id:${server.port}} #This is used in Eureka SErver Status link text    
+#  
